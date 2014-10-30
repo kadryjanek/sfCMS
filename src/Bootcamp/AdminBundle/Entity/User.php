@@ -4,6 +4,7 @@ namespace Bootcamp\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * User
@@ -20,11 +21,19 @@ class User extends BaseUser
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Page", mappedBy="user")
+     * @var ArrayCollection
+     */
+    protected $pages;
 
     public function __construct()
     {
     	parent::__construct();
+    	
+    	$this->pages = new ArrayCollection();
     }
 
     /**

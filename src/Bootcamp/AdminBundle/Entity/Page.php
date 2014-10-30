@@ -3,6 +3,8 @@
 namespace Bootcamp\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Page
@@ -21,6 +23,12 @@ class Page
      */
     private $id;
 
+    /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(name="slug", length=255, unique=true)
+     */
+    private $slug;
+    
     /**
      * @var string
      *
@@ -69,8 +77,39 @@ class Page
      * @ORM\Column(name="createdAt", type="datetime")
      */
     private $createdAt;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="pages")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * 
+     * @var User
+     */
+    protected $user;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Page", inversedBy="pages")
+     *
+     * @var User
+     */
+    protected $page;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Page", mappedBy="page")
+     * @var ArrayCollection
+     */
+    protected $pages;
 
+    public function __construct()
+    {
+    	$this->createdAt = new \DateTime();
+    	$this->pages = new ArrayCollection();
+    }
 
+    public function __toString()
+    {
+    	return $this->getTitle();
+    }
+    
     /**
      * Get id
      *
@@ -240,5 +279,107 @@ class Page
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Bootcamp\AdminBundle\Entity\User $user
+     * @return Page
+     */
+    public function setUser(\Bootcamp\AdminBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Bootcamp\AdminBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set page
+     *
+     * @param \Bootcamp\AdminBundle\Entity\Page $page
+     * @return Page
+     */
+    public function setPage(\Bootcamp\AdminBundle\Entity\Page $page = null)
+    {
+        $this->page = $page;
+
+        return $this;
+    }
+
+    /**
+     * Get page
+     *
+     * @return \Bootcamp\AdminBundle\Entity\Page 
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    /**
+     * Add pages
+     *
+     * @param \Bootcamp\AdminBundle\Entity\Page $pages
+     * @return Page
+     */
+    public function addPage(\Bootcamp\AdminBundle\Entity\Page $pages)
+    {
+        $this->pages[] = $pages;
+
+        return $this;
+    }
+
+    /**
+     * Remove pages
+     *
+     * @param \Bootcamp\AdminBundle\Entity\Page $pages
+     */
+    public function removePage(\Bootcamp\AdminBundle\Entity\Page $pages)
+    {
+        $this->pages->removeElement($pages);
+    }
+
+    /**
+     * Get pages
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPages()
+    {
+        return $this->pages;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Page
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

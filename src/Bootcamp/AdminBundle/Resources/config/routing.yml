@@ -1,3 +1,11 @@
 bootcamp_admin_homepage:
-    path:     /hello/{name}
+    path:     /
     defaults: { _controller: BootcampAdminBundle:Default:index }
+
+bootcamp_admin_user:
+    resource: "@BootcampAdminBundle/Resources/config/routing/user.yml"
+    prefix:   /user
+    
+bootcamp_admin_page:
+    resource: "@BootcampAdminBundle/Resources/config/routing/page.yml"
+    prefix:   /page
