@@ -4,7 +4,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:      { fallback: "%locale%" }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -33,7 +33,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
+    bundles:        [ BootcampFrontendBundle ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -77,3 +77,8 @@ fos_user:
     firewall_name: main
     user_class: Bootcamp\AdminBundle\Entity\User
 
+stof_doctrine_extensions:
+    default_locale: "%locale%"
+    orm:
+        default:
+            sluggable: true

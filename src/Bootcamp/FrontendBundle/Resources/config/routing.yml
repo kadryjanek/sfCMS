@@ -1,3 +1,7 @@
-bootcamp_frontend_homepage:
+homepage:
     path:     /
     defaults: { _controller: BootcampFrontendBundle:Default:index }
+    
+show_page:
+    path:     /{slug}
+    defaults: { _controller: BootcampFrontendBundle:Default:show }
