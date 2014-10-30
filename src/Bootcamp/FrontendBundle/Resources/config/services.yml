@@ -1,0 +1,7 @@
+parameters:
+#    bootcamp_frontend.example.class: Bootcamp\FrontendBundle\Example
+
+services:
+#    bootcamp_frontend.example:
+#        class: %bootcamp_frontend.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
