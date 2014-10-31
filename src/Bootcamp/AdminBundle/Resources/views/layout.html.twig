@@ -9,11 +9,6 @@
 
     <!-- Le styles -->
     <link href="{{ asset('bundles/jordillonchcrudgenerator/css/bootstrap.css') }}" rel="stylesheet">
-    <style>
-        body {
-            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-        }
-    </style>
     <link href="{{ asset('bundles/jordillonchcrudgenerator/css/bootstrap-responsive.css') }}" rel="stylesheet">
     <link href="{{ asset('bundles/jordillonchcrudgenerator/css/crud.css') }}" rel="stylesheet">
     <link href="'https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'" rel="stylesheet">
@@ -33,14 +28,16 @@
 	
     {% block menu %}
     
-    	<nav role="navigation" class="navbar navbar-default">
-	        <div class="navbar-collapse collapse" id="navbar">
+    	<nav role="navigation" class="navbar">
+	        <div class="navbar-collapse" id="navbar">
 	            {{ knp_menu_render('BootcampAdminBundle:Builder:mainMenu') }}
 	            {{ knp_menu_render('BootcampAdminBundle:Builder:userMenuAuthenticated') }}
 	        </div>
 		</nav>
     
     {% endblock %}
+    
+    <div class="clearfix"></div>
 
     {% for type, flashMessages in app.session.flashbag.all() %}
         {% for flashMessage in flashMessages %}
